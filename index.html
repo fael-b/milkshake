@@ -17,12 +17,13 @@
     <div id='patternContainer' class='flex flex-col mx-auto h-screen justify-center overflow-hidden'></div>
     <script>
         const iconSize = window.innerWidth<640 ? 64 : 128
-        const milkpattern = patternGen(['red', 'green', 'yellow', 'black', 'blue', 'purple'], 2, Math.floor(window.innerWidth/iconSize)-1, Math.floor(window.innerHeight/iconSize))
+        const desktopMargin = window.innerWidth<640 ? 0 : 1
+        const milkpattern = patternGen(['red', 'green', 'yellow', 'black', 'blue', 'purple'], 2, Math.floor(window.innerWidth/iconSize)-desktopMargin, Math.floor(window.innerHeight/iconSize))
         let evenIndex = 0
         const patternHtml = milkpattern.map(line => {
             let margin = evenIndex%2 != 0 ? 'ml-8 sm:ml-16' : ''
             evenIndex++
-            return `<div style='width: ${(Math.floor(window.innerWidth/iconSize)-1)*iconSize}px;' class='flex justify-left items-center ${margin}'>${line.map(color => {
+            return `<div style='width: ${(Math.floor(window.innerWidth/iconSize)-desktopMargin)*iconSize}px;' class='flex justify-left items-center ${margin}'>${line.map(color => {
                 return `<img onclick='location.reload();' class='m-4 sm:m-8 w-8 sm:w-16 h-8 sm:h-16 cursor-pointer' alt='' src='./assets/${color}.svg'>`
                 })
                 .join('')}</div>`

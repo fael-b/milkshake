@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./pattern-generator.js"></script>
+    <link rel="stylesheet" href="https://fael.dev/output.css">
+    <title>Milkshake</title>
+    <script>
+        let faviconList = ['red', 'green', 'yellow', 'blue', 'purple']
+        document.querySelector('head').appendChild(document.createRange().createContextualFragment(`<link rel="shortcut icon" href="./assets/${faviconList[Math.floor(Math.random() * faviconList.length)] + (Math.floor(Math.random() * 2) + 1)}.svg" type="image/svg">`))
+    </script>
+    
+</head>
+<body class='flex'>
+    
+    <div id='patternContainer' class='flex flex-col mx-auto h-screen justify-center overflow-hidden'></div>
+    <script>
+        const iconSize = window.innerWidth<640 ? 64 : 128
+        const milkpattern = patternGen(['red', 'green', 'yellow', 'black', 'blue', 'purple'], 2, Math.floor(window.innerWidth/iconSize)-1, Math.floor(window.innerHeight/iconSize))
+        let evenIndex = 0
+        const patternHtml = milkpattern.map(line => {
+            let margin = evenIndex%2 != 0 ? 'ml-8 sm:ml-16' : ''
+            evenIndex++
+            return `<div style='width: ${(Math.floor(window.innerWidth/iconSize)-1)*iconSize}px;' class='flex justify-left items-center ${margin}'>${line.map(color => {
+                return `<img onclick='location.reload();' class='m-4 sm:m-8 w-8 sm:w-16 h-8 sm:h-16 cursor-pointer' alt='' src='./assets/${color}.svg'>`
+                })
+                .join('')}</div>`
+        }) 
+        document.querySelector('#patternContainer').innerHTML = patternHtml.join('')
+    </script>
+</body>
+</html>

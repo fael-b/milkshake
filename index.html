@@ -7,13 +7,11 @@
     <link rel="stylesheet" href="./style.css">
     <title>Milkshake</title>
     <script>
-        let faviconList = ['red', 'green', 'yellow', 'blue', 'purple']
+        const faviconList = ['red', 'green', 'yellow', 'blue', 'purple']
         document.querySelector('head').appendChild(document.createRange().createContextualFragment(`<link rel="shortcut icon" href="./assets/${faviconList[Math.floor(Math.random() * faviconList.length)] + (Math.floor(Math.random() * 2) + 1)}.svg" type="image/svg">`))
     </script>
-    
 </head>
 <body class='flex'>
-    
     <div id='patternContainer' class='flex flex-col mx-auto h-screen justify-center overflow-hidden'></div>
     <script>
         const iconSize = window.innerWidth<640 ? 64 : 128
